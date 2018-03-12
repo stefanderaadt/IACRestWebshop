@@ -1,26 +1,24 @@
 package iac.rest.webshop.controllers;
 
-import iac.rest.webshop.persistence.Task;
 import iac.rest.webshop.repositories.TaskRepository;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
-public class TaskController {
+@RequestMapping("/products")
+public class ProductController {
 
-	private TaskRepository taskRepository;
+	private ProductRepository productRepository;
 
-	public TaskController(TaskRepository taskRepository) {
-		this.taskRepository = taskRepository;
+	public ProductController(TaskRepository taskRepository) {
+		this.productRepository = productRepository;
 	}
 
 	@PostMapping
-	public void addTask(@RequestBody Task task) {
-		taskRepository.save(task);
+	public void addTask(@RequestBody Product product) {
+		productRepository.save(product);
 	}
 
 	@GetMapping
