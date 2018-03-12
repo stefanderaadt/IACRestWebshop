@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
-public class OrderRow {
+public class ProductOrderRow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -16,7 +16,7 @@ public class OrderRow {
     @OneToOne(fetch = FetchType.LAZY)
     private Product product;
 
-    protected OrderRow() {}
+    protected ProductOrderRow() {}
 
     public long getId() {
         return id;
