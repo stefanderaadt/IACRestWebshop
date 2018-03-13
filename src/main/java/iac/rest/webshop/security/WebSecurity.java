@@ -14,7 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static iac.rest.webshop.security.SecurityConstants.SIGN_UP_URL;
+import static iac.rest.webshop.security.SecurityConstants.*;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -30,6 +30,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests()
 				.antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+				.antMatchers(HttpMethod.GET, PRODUCTS_URL).permitAll()
+				.antMatchers(HttpMethod.GET, PRODUCT_URL).permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.addFilterAfter(new JWTResponseHeaderFilter(), CsrfFilter.class)

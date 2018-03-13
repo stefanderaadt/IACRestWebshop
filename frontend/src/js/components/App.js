@@ -10,20 +10,45 @@ import LoginPage from "./LoginPage"
 // User actions
 import {login} from '../actions/userActions'
 
+// Products userActions
+import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
+
 class App extends React.Component {
   login = (username, password) => {
     this.props.dispatch(login(username, password))
   }
 
-  render() {
-    console.log(this.props.state)
+  setSelectedProduct = (id) => {
+    this.props.dispatch(setSelectedProduct(id))
+  }
 
+  // Component loaded event
+  componentDidMount() {
+    this.props.dispatch(fetchProducts())
+  }
+
+  render() {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path='/' component={Home}/>
-          <Route path='/products' component={Products}/>
-          <Route path='/product/:id' component={Product}/>
+          <Route exact path='/' render={(props) => (
+            <Home {...props}
+              state={this.props.state}/>
+          )} />
+          <Route path='/login' render={(props) => (
+            <LoginPage {...props}
+              state={this.props.state}
+              login={this.login}/>
+          )} />
+          <Route path='/products' render={(props) => (
+            <Products {...props}
+              state={this.props.state}
+              setSelectedProduct={this.setSelectedProduct}/>
+          )} />
+          <Route path='/product/:id' render={(props) => (
+            <Product {...props}
+              state={this.props.state}/>
+          )}/>
         </div>
       </BrowserRouter>
     )
