@@ -1,6 +1,6 @@
 import React from "react"
 
-import Navbar from "./Navbar"
+import { Header, Content } from './Layouts'
 
 class Product extends React.Component {
   render() {
@@ -8,8 +8,8 @@ class Product extends React.Component {
 
     return (
       <div>
-        <Navbar />
-        <h1>Product</h1>
+        <Header />
+        <Content />
       </div>
     )
   }

@@ -18,19 +18,15 @@ class App extends React.Component {
   render() {
     console.log(this.props.state)
 
-    if (this.props.state.isLoggedIn) {
-      return (
-        <BrowserRouter>
-          <div>
-            <Route exact path='/' component={Home}/>
-            <Route path='/products' component={Products}/>
-            <Route path='/product/:id' component={Product}/>
-          </div>
-        </BrowserRouter>
-      )
-    }
-
-    return <LoginPage login={this.login} />
+    return (
+      <BrowserRouter>
+        <div>
+          <Route exact path='/' component={Home}/>
+          <Route path='/products' component={Products}/>
+          <Route path='/product/:id' component={Product}/>
+        </div>
+      </BrowserRouter>
+    )
   }
 }
 

@@ -1,13 +1,13 @@
 import React from "react"
 
-import Navbar from "./Navbar"
+import { Header, Content } from './Layouts'
 
 class Products extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <h1>Products</h1>
+        <Header />
+        <Content />
       </div>
     )
   }
