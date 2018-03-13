@@ -1,23 +1,35 @@
 package iac.rest.webshop.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ProductOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	private Adress adress;
 
-	private ArrayList<OrderRow> orderRows;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "order_id")
+	private List<ProductOrderRow> orderRows = new ArrayList<>();
+
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "application_user_id")
+	private ApplicationUser user;
 
 	protected ProductOrder() {}
 
-	public ProductOrder(Adress adress, ArrayList<OrderRow> orderRows) {
-		//this.adress = adress;
+	public ProductOrder(Adress adress, ArrayList<ProductOrderRow> orderRows) {
+		this.adress = adress;
 		this.orderRows = orderRows;
 	}
 
@@ -33,12 +45,19 @@ public class ProductOrder {
 		this.adress = adress;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY)
-	public ArrayList<OrderRow> getOrderRows() {
+	public List<ProductOrderRow> getOrderRows() {
 		return orderRows;
 	}
 
-	public void setOrderRows(ArrayList<OrderRow> orderRows) {
+	public void setOrderRows(List<ProductOrderRow> orderRows) {
 		this.orderRows = orderRows;
+	}
+
+	public ApplicationUser getUser() {
+		return user;
+	}
+
+	public void setUser(ApplicationUser user) {
+		this.user = user;
 	}
 }

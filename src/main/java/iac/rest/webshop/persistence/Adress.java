@@ -1,32 +1,47 @@
 package iac.rest.webshop.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Task {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Adress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String description;
 
-	protected Task() {}
+	private String street;
 
-	public Task(String description) {
-		this.description = description;
+	private String housenumber;
+
+	protected Adress() {}
+
+	public Adress(String street, String housenumber) {
+		this.street = street;
+		this.housenumber = housenumber;
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getHousenumber() {
+		return housenumber;
+	}
+
+	public void setHousenumber(String housenumber) {
+		this.housenumber = housenumber;
 	}
 }

@@ -1,56 +1,60 @@
 package iac.rest.webshop.controllers;
 
-import iac.rest.webshop.persistence.Product;
-import iac.rest.webshop.repositories.ProductRepository;
+import iac.rest.webshop.persistence.ProductOrder;
+import iac.rest.webshop.repositories.OrderRepository;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.security.Principal;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/orders/")
+public class OrderController {
 
-	private ProductRepository productRepository;
+	private OrderRepository orderRepository;
 
-	public ProductController(ProductRepository productRepository) {
-		this.productRepository = productRepository;
+	public OrderController(OrderRepository orderRepository) {
+		this.orderRepository = orderRepository;
 	}
 
 	@PostMapping
-	public void addProduct(@RequestBody Product product) {
-		productRepository.save(product);
-	}
-
-	@GetMapping
-	public List<Product> getProducts() {
-		return productRepository.findAll();
+	public void addOrder(@RequestBody ProductOrder order) {
+		orderRepository.save(order);
 	}
 
 	@GetMapping("/{id}")
-	public Product getProduct(@PathVariable long id, HttpServletResponse response) {
-		Product product = productRepository.getOne(id);
+	public ProductOrder getOrder(@PathVariable long id, HttpServletResponse response, Principal principal) {
+		ProductOrder order = orderRepository.getOne(id);
 
 		// Return 204 when not found
-		if (product == null) response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		if (order == null) {
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			return null;
+		}
 
-		return product;
+		//Check if order is from user
+		if (!order.getUser().getUsername().equals(principal.getName())){
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return null;
+		}
+
+
+		return order;
 	}
 
 	@PutMapping("/{id}")
-	public void editProduct(@PathVariable long id, @RequestBody Product product) {
-		Product existingProduct = productRepository.getOne(id);
+	public void editOrder(@PathVariable long id, @RequestBody ProductOrder order) {
+		ProductOrder existingOrder = orderRepository.getOne(id);
 
-		Assert.notNull(existingProduct, "Product not found");
-		existingProduct.setName(product.getName());
-		existingProduct.setDiscounts(product.getDiscounts());
-		existingProduct.setPrice(product.getPrice());
-		productRepository.save(existingProduct);
+		Assert.notNull(existingOrder, "Order not found");
+		existingOrder.setAdress(order.getAdress());
+		existingOrder.setOrderRows(order.getOrderRows());
+		orderRepository.save(existingOrder);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteProduct(@PathVariable long id) {
-		productRepository.deleteById(id);
+	public void deleteOrder(@PathVariable long id) {
+		orderRepository.deleteById(id);
 	}
 }

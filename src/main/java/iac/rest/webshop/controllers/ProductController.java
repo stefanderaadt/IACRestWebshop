@@ -1,52 +1,58 @@
 package iac.rest.webshop.controllers;
 
-import iac.rest.webshop.repositories.TaskRepository;
+import iac.rest.webshop.persistence.Product;
+import iac.rest.webshop.repositories.ApplicationUserRepository;
+import iac.rest.webshop.repositories.ProductRepository;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
 	private ProductRepository productRepository;
+	private ApplicationUserRepository userRepository;
 
-	public ProductController(TaskRepository taskRepository) {
+	public ProductController(ProductRepository productRepository) {
 		this.productRepository = productRepository;
 	}
 
 	@PostMapping
-	public void addTask(@RequestBody Product product) {
+	public void addProduct(@RequestBody Product product) {
 		productRepository.save(product);
 	}
 
 	@GetMapping
-	public List<Task> getTasks() {
-		return taskRepository.findAll();
+	public List<Product> getProducts() {
+		return productRepository.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Task getTask(@PathVariable long id, HttpServletResponse response) {
-		Task task = taskRepository.getOne(id);
+	public Product getProduct(@PathVariable long id, HttpServletResponse response) {
+		Product product = productRepository.getOne(id);
 
 		// Return 204 when not found
-		if (task == null) response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		if (product == null) response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 
-		return task;
+		return product;
 	}
 
 	@PutMapping("/{id}")
-	public void editTask(@PathVariable long id, @RequestBody Task task) {
-		Task existingTask = taskRepository.getOne(id);
+	public void editProduct(@PathVariable long id, @RequestBody Product product) {
+		Product existingProduct = productRepository.getOne(id);
 
-		Assert.notNull(existingTask, "Task not found");
-		existingTask.setDescription(task.getDescription());
-		taskRepository.save(existingTask);
+		Assert.notNull(existingProduct, "Product not found");
+		existingProduct.setName(product.getName());
+		existingProduct.setDiscounts(product.getDiscounts());
+		existingProduct.setPrice(product.getPrice());
+		productRepository.save(existingProduct);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteTask(@PathVariable long id) {
-		taskRepository.deleteById(id);
+	public void deleteProduct(@PathVariable long id) {
+		productRepository.deleteById(id);
 	}
 }
