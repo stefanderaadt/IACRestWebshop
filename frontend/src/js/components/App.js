@@ -13,7 +13,7 @@ import Products from "./Products"
 import LoginPage from "./LoginPage"
 
 // User actions
-import {login, checkLoggedIn} from '../actions/userActions'
+import {login, logout, checkLoggedIn} from '../actions/userActions'
 
 // Products userActions
 import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
@@ -40,6 +40,10 @@ class App extends React.Component {
     this.props.dispatch(login(username, password))
   }
 
+  logout = () => {
+    this.props.dispatch(logout())
+  }
+
   setSelectedProduct = (id) => {
     this.props.dispatch(setSelectedProduct(id))
   }
@@ -60,7 +64,7 @@ class App extends React.Component {
   // Component loaded event
   constructor(props) {
     super(props)
-    
+
     props.dispatch(fetchProducts())
   }
 
