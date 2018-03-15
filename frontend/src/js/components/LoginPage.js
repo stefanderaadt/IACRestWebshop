@@ -39,6 +39,24 @@ class LoginPage extends React.Component {
           Login
         </Button>
 
+        <Button
+          label="Primary"
+          primary={true}
+          onClick={
+            () => this.props.displaySuccessAlert("Test success")
+          }>
+          Success
+        </Button>
+
+        <Button
+          label="Primary"
+          primary={true}
+          onClick={
+            () => this.props.displayErrorAlert("Test error")
+          }>
+          Error
+        </Button>
+
       </div>
     )
   }
