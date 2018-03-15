@@ -3,6 +3,8 @@ package iac.rest.webshop.controllers;
 import iac.rest.webshop.persistence.Product;
 import iac.rest.webshop.repositories.ApplicationUserRepository;
 import iac.rest.webshop.repositories.ProductRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +16,6 @@ import java.util.List;
 public class ProductController {
 
 	private ProductRepository productRepository;
-	private ApplicationUserRepository userRepository;
 
 	public ProductController(ProductRepository productRepository) {
 		this.productRepository = productRepository;
@@ -31,13 +32,13 @@ public class ProductController {
 	}
 
 	@GetMapping("/{id}")
-	public Product getProduct(@PathVariable long id, HttpServletResponse response) {
+	public ResponseEntity<Product> getProduct(@PathVariable long id, HttpServletResponse response) {
 		Product product = productRepository.getOne(id);
 
 		// Return 204 when not found
-		if (product == null) response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+		if (product == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);;
 
-		return product;
+        return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
 	@PutMapping("/{id}")

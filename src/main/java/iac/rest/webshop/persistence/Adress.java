@@ -44,4 +44,13 @@ public class Adress {
 	public void setHousenumber(String housenumber) {
 		this.housenumber = housenumber;
 	}
+
+	@Override
+	public String toString() {
+		return "Adress{" +
+				"id=" + id +
+				", street='" + street + '\'' +
+				", housenumber='" + housenumber + '\'' +
+				'}';
+	}
 }
