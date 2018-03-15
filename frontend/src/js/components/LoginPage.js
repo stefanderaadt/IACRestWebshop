@@ -24,19 +24,22 @@ class LoginPage extends React.Component {
     return (
       <div>
         <TextField
-          floatingLabelText="Username"
           onChange={this.onUsernameChange}/>
         <TextField
           type="password"
-          floatingLabelText="Password"
           onChange={this.onPasswordChange}/>
         <Button
-          label="Primary"
-          primary={true}
+          label="Login"
           onClick={
             () => this.props.login(this.state.username, this.state.password)
           }>
           Login
+        </Button>
+
+        <Button
+          label="Logout"
+          onClick={this.props.logout}>
+          Logout
         </Button>
 
       </div>

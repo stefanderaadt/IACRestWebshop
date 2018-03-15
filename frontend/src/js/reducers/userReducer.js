@@ -1,5 +1,4 @@
 const defaultState = {
-  token: null,
   loggingIn: false,
   loggedIn: false,
   error: null
@@ -8,18 +7,25 @@ const defaultState = {
 export default function reducer(state=defaultState, action) {
 
     switch (action.type) {
-      case "FETCH_LOGIN": {
+      case "USER_FETCH_LOGIN": {
         return {...state, loggingIn: true}
       }
-      case "FETCH_LOGIN_REJECTED": {
+      case "USER_FETCH_LOGIN_REJECTED": {
         return {...state, loggedIn: false, error: action.payload}
       }
-      case "FETCH_LOGIN_FULFILLED": {
+      case "USER_FETCH_LOGIN_FULFILLED": {
         return {
           ...state,
           loggingIn: false,
           loggedIn: true,
-          token: action.payload
+        }
+      }
+      case "USER_LOGOUT":{
+        return{
+          ...state,
+          loggingIn: false,
+          loggedIn: false,
+          error: null
         }
       }
     }

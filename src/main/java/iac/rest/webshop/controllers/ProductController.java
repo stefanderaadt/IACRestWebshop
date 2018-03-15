@@ -33,10 +33,10 @@ public class ProductController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable long id, HttpServletResponse response) {
-		Product product = productRepository.getOne(id);
-
 		// Return 204 when not found
-		if (product == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);;
+		if (!productRepository.findById(id).isPresent()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        Product product = productRepository.getOne(id);
 
         return new ResponseEntity<>(product, HttpStatus.OK);
 	}

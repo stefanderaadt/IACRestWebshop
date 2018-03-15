@@ -8,7 +8,7 @@ import Products from "./Products"
 import LoginPage from "./LoginPage"
 
 // User actions
-import {login} from '../actions/userActions'
+import {login, logout} from '../actions/userActions'
 
 // Products userActions
 import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
@@ -16,6 +16,10 @@ import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
 class App extends React.Component {
   login = (username, password) => {
     this.props.dispatch(login(username, password))
+  }
+
+  logout = () => {
+    this.props.dispatch(logout())
   }
 
   setSelectedProduct = (id) => {
@@ -38,7 +42,8 @@ class App extends React.Component {
           <Route path='/login' render={(props) => (
             <LoginPage {...props}
               state={this.props.state}
-              login={this.login}/>
+              login={this.login}
+              logout={this.logout}/>
           )} />
           <Route path='/products' render={(props) => (
             <Products {...props}
