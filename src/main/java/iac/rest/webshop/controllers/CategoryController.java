@@ -5,7 +5,6 @@ import iac.rest.webshop.repositories.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import iac.rest.webshop.controllers.helpers.Error;
 
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;

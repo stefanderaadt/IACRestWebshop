@@ -1,12 +1,14 @@
 import React from "react"
 import { connect } from "react-redux"
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Redirect,
 } from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
 
+import {PrivateRoute} from "../helpers/PrivateRoute"
+import {history} from "../helpers/history"
 import Home from "./Home"
 import Product from "./Product"
 import Products from "./Products"
@@ -20,19 +22,10 @@ import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
 
 // Alert actions
 import {
-  displaySuccessAlertAction,
-  displayErrorAlertAction,
-  endAlertAction
+  successAlertAction,
+  errorAlertAction,
+  hideAlertAction
 } from '../actions/alertActions'
-
-//Create private route object
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    props.loggedIn === true
-      ? <Component {...props} />
-      : <Redirect to='/login' />
-  )} />
-)
 
 class App extends React.Component {
   // User functions
@@ -49,16 +42,16 @@ class App extends React.Component {
   }
 
   // Alert functions
-  displaySuccessAlert = (message) =>{
-    this.props.dispatch(displaySuccessAlertAction(message))
+  successAlert = (message) =>{
+    this.props.dispatch(successAlertAction(message))
   }
 
-  displayErrorAlert = (message) =>{
-    this.props.dispatch(displayErrorAlertAction(message))
+  errorAlert = (message) =>{
+    this.props.dispatch(errorAlertAction(message))
   }
 
-  endAlert = () =>{
-    this.props.dispatch(endAlertAction())
+  hideAlert = () =>{
+    this.props.dispatch(hideAlertAction())
   }
 
   // Component loaded event
@@ -66,12 +59,13 @@ class App extends React.Component {
     super(props)
 
     props.dispatch(fetchProducts())
+    props.dispatch(checkLoggedIn())
   }
 
   render() {
     return (
       <div>
-        <Router>
+        <Router history={history}>
           <div>
             <Route exact path='/' render={(props) => (
               <Home {...props}
@@ -81,6 +75,7 @@ class App extends React.Component {
               <LoginPage {...props}
                 state={this.props.state}
                 login={this.login}
+                logout={this.logout}
                 displaySuccessAlert={this.displaySuccessAlert}
                 displayErrorAlert={this.displayErrorAlert}/>
             )} />
@@ -94,7 +89,7 @@ class App extends React.Component {
                 state={this.props.state}/>
             )}/>
 
-            <PrivateRoute path='/orders' loggedIn={this.props.state.user.loggedIn} render={(props) => (
+            <PrivateRoute path='/orders' render={(props) => (
               <Product {...props}
                 state={this.props.state}/>
             )}/>
@@ -108,7 +103,7 @@ class App extends React.Component {
           open={this.props.state.alert.alert}
           message={this.props.state.alert.message}
           autoHideDuration={4000}
-          onClose={this.endAlert}
+          onClose={this.hideAlert}
           bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
         />
       </div>
