@@ -38,4 +38,13 @@ public class ProductOrderRow {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "ProductOrderRow{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", product=" + product +
+                '}';
+    }
 }

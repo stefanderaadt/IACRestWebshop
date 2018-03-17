@@ -60,4 +60,14 @@ public class ProductOrder {
 	public void setUser(ApplicationUser user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "ProductOrder{" +
+				"id=" + id +
+				", adress=" + adress +
+				", orderRows=" + orderRows +
+				", user=" + user +
+				'}';
+	}
 }

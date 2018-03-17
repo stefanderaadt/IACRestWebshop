@@ -8,4 +8,5 @@ public class SecurityConstants {
 	public static final String SIGN_UP_URL = "/users/sign-up";
 	public static final String PRODUCTS_URL = "/products";
 	public static final String PRODUCT_URL = "/products/**";
+	public static final String CATEGORY_URL = "/categories/**";
 }

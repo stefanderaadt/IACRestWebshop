@@ -29,10 +29,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests()
+				//Allow user to access these urls
 				.antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
 				.antMatchers(HttpMethod.GET, PRODUCTS_URL).permitAll()
 				.antMatchers(HttpMethod.GET, PRODUCT_URL).permitAll()
+				.antMatchers(HttpMethod.GET, CATEGORY_URL).permitAll()
 				.anyRequest().authenticated()
+
+				//Add security filters
 				.and()
 				.addFilterAfter(new JWTResponseHeaderFilter(), CsrfFilter.class)
 				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
