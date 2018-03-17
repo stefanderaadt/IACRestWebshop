@@ -17,7 +17,7 @@ import LoginPage from "./LoginPage"
 import {login, logout, checkLoggedIn} from '../actions/userActions'
 
 // Products userActions
-import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
+import {fetchProducts, setSelectedProduct, addToCart} from '../actions/productsActions'
 
 // Alert actions
 import {
@@ -43,6 +43,10 @@ class App extends React.Component {
   //Products functions
   fetchProducts = () => {
     this.props.dispatch(fetchProducts())
+  }
+
+  addToCart = (id) => {
+    this.props.dispatch(addToCart(id))
   }
 
   // Alert functions
@@ -84,9 +88,10 @@ class App extends React.Component {
             )} />
             <Route path='/products' render={(props) => (
               <Products {...props}
-                products={this.props.state.products.products}
+                products={this.props.state.products}
                 setSelectedProduct={this.setSelectedProduct}
-                fetchProducts={this.fetchProducts}/>
+                fetchProducts={this.fetchProducts}
+                addToCart={this.addToCart}/>
             )}/>
             <Route path='/product/:id' render={(props) => (
               <Product {...props}
