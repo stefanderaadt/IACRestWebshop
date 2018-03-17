@@ -29,7 +29,7 @@ class LoginPage extends React.Component {
           label="Password"
           onChange={this.onPasswordChange}/>
         <Button
-          label="Primary"
+          label="Login"
           onClick={
             () => this.props.login(this.state.username, this.state.password)
           }>
@@ -52,7 +52,6 @@ class LoginPage extends React.Component {
 
         <Button
           label="Primary"
-          primary={true}
           onClick={
             () => this.props.displayErrorAlert("Test error")
           }>

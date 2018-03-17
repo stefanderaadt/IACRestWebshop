@@ -1,7 +1,9 @@
 package iac.rest.webshop.controllers;
 
+import iac.rest.webshop.persistence.Category;
 import iac.rest.webshop.persistence.Product;
 import iac.rest.webshop.repositories.ApplicationUserRepository;
+import iac.rest.webshop.repositories.CategoryRepository;
 import iac.rest.webshop.repositories.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +18,26 @@ import java.util.List;
 public class ProductController {
 
 	private ProductRepository productRepository;
+	private CategoryRepository categoryRepository;
 
-	public ProductController(ProductRepository productRepository) {
+	public ProductController(ProductRepository productRepository,
+                             CategoryRepository categoryRepository) {
 		this.productRepository = productRepository;
+		this.categoryRepository = categoryRepository;
 	}
 
 	@PostMapping
 	public void addProduct(@RequestBody Product product) {
+	    System.out.println(product);
+
+        Category category = categoryRepository.getOne(product.getCategory().getId());
+
+        //Add category to product and product to category
+        product.setCategory(category);
+        category.getProducts().add(product);
+
+        System.out.println(product);
+
 		productRepository.save(product);
 	}
 
@@ -43,12 +58,16 @@ public class ProductController {
 
 	@PutMapping("/{id}")
 	public void editProduct(@PathVariable long id, @RequestBody Product product) {
+	    System.out.println("PUT PUT PUT");
+
 		Product existingProduct = productRepository.getOne(id);
 
 		Assert.notNull(existingProduct, "Product not found");
 		existingProduct.setName(product.getName());
+		existingProduct.setDescription(product.getDescription());
 		existingProduct.setDiscounts(product.getDiscounts());
 		existingProduct.setPrice(product.getPrice());
+		existingProduct.setCategory(product.getCategory());
 		productRepository.save(existingProduct);
 	}
 

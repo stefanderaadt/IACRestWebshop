@@ -28,7 +28,9 @@ export default function reducer(state=defaultState, action) {
           selectedProduct: action.payload
         }
       }
+      default:{
+        return state
+      }
     }
 
-    return state
 }
