@@ -22,7 +22,6 @@ class LoginPage extends React.Component {
     return (
       <div>
         <TextField
-<<<<<<< HEAD
           label="Username"
           onChange={this.onUsernameChange}/>
         <TextField
@@ -31,14 +30,6 @@ class LoginPage extends React.Component {
           onChange={this.onPasswordChange}/>
         <Button
           label="Primary"
-=======
-          onChange={this.onUsernameChange}/>
-        <TextField
-          type="password"
-          onChange={this.onPasswordChange}/>
-        <Button
-          label="Login"
->>>>>>> cda210477d98742018081219a3d586f690160761
           onClick={
             () => this.props.login(this.state.username, this.state.password)
           }>
@@ -53,7 +44,6 @@ class LoginPage extends React.Component {
 
         <Button
           label="Primary"
-          primary={true}
           onClick={
             () => this.props.displaySuccessAlert("Test success")
           }>

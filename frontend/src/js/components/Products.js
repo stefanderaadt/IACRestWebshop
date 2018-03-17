@@ -4,11 +4,10 @@ import { Header, Content } from './Layouts'
 
 class Products extends React.Component {
   render() {
-    console.log(this.props.state)
+    console.log(this.props.products)
     return (
       <div>
         <Header />
-        products
       </div>
     )
   }
