@@ -26,9 +26,9 @@ function Header(props) {
         <Typography variant="title" color="inherit" className={ classes.flex }>
           Title
         </Typography>
-        <Link to="/"><Button color="inherit">Home</Button></Link>
-        <Link to="/products"><Button color="inherit">Products</Button></Link>
-        <Button color="inherit">Login</Button>
+        <Button component={ Link } to="/" color="inherit">Home</Button>
+        <Button component={ Link } to="/products" color="inherit">Products</Button>
+        <Button component={ Link } to="/login" color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
   )
