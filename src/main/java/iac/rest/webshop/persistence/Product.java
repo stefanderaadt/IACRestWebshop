@@ -26,17 +26,20 @@ public class Product {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
-	@JsonIgnore
+    @JsonIgnore
 	private Category category;
 
 	protected Product() {}
 
-	public Product(String name, float price) {
-		this.name = name;
-		this.price = price;
-	}
+    public Product(String name, String description, float price, List<Discount> discounts, Category category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.discounts = discounts;
+        this.category = category;
+    }
 
-	public long getId() {
+    public long getId() {
 		return id;
 	}
 
@@ -87,7 +90,6 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", discounts=" + discounts +
-                ", category=" + category +
                 '}';
     }
 }

@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import {
   Router,
   Route,
-  Redirect,
 } from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
 
@@ -41,6 +40,11 @@ class App extends React.Component {
     this.props.dispatch(setSelectedProduct(id))
   }
 
+  //Products functions
+  fetchProducts = () => {
+    this.props.dispatch(fetchProducts())
+  }
+
   // Alert functions
   successAlert = (message) =>{
     this.props.dispatch(successAlertAction(message))
@@ -58,7 +62,6 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    props.dispatch(fetchProducts())
     props.dispatch(checkLoggedIn())
   }
 
@@ -81,9 +84,10 @@ class App extends React.Component {
             )} />
             <Route path='/products' render={(props) => (
               <Products {...props}
-                state={this.props.state}
-                setSelectedProduct={this.setSelectedProduct}/>
-            )} />
+                products={this.props.state.products.products}
+                setSelectedProduct={this.setSelectedProduct}
+                fetchProducts={this.fetchProducts}/>
+            )}/>
             <Route path='/product/:id' render={(props) => (
               <Product {...props}
                 state={this.props.state}/>
