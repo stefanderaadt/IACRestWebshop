@@ -1,8 +1,5 @@
 import React from "react"
 import { Paper, Button, Typography } from 'material-ui'
-import { withStyles } from 'material-ui/styles';
-
-import { Header } from './Layouts'
 
 class Products extends React.Component {
   componentDidMount(){
@@ -12,7 +9,6 @@ class Products extends React.Component {
   render() {
     return (
       <div>
-        <Header />
 
         <div style={{padding: '12px'}}>
 
