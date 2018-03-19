@@ -13,6 +13,8 @@ import Product from "./Product"
 import Products from "./Products"
 import LoginPage from "./LoginPage"
 
+import { Header } from "./Layouts"
+
 // User actions
 import {login, logout, checkLoggedIn} from '../actions/userActions'
 
@@ -74,6 +76,11 @@ class App extends React.Component {
       <div>
         <Router history={history}>
           <div>
+            <Header
+              user={this.props.state.user}
+              logout={this.logout}
+            />
+
             <Route exact path='/' render={(props) => (
               <Home {...props}
                 state={this.props.state}/>
@@ -82,9 +89,13 @@ class App extends React.Component {
               <LoginPage {...props}
                 state={this.props.state}
                 login={this.login}
+<<<<<<< HEAD
                 logout={this.logout}
                 successAlert={this.successAlert}
                 errorAlert={this.errorAlert}/>
+=======
+                logout={this.logout}/>
+>>>>>>> 21cf680809e83bfa800d94307f12c5a4f413b74e
             )} />
             <Route path='/products' render={(props) => (
               <Products {...props}

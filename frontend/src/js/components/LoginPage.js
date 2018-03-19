@@ -1,5 +1,13 @@
 import React from "react"
-import {TextField, Button} from 'material-ui'
+import {TextField, Button, Paper} from 'material-ui'
+
+const styles = {
+  paper: {
+    padding: '12px',
+    width: '200px',
+    display: 'inline-block'
+  },
+}
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -20,6 +28,7 @@ class LoginPage extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <TextField
           label="Username"
@@ -58,6 +67,25 @@ class LoginPage extends React.Component {
           Error
         </Button>
 
+=======
+      <div style={{padding: '12px',  textAlign: 'center'}}>
+        <Paper style={styles.paper}>
+          <TextField
+            label="Username"
+            onChange={this.onUsernameChange}/>
+          <TextField
+            type="password"
+            label="Password"
+            onChange={this.onPasswordChange}/>
+          <Button
+            label="Login"
+            onClick={
+              () => this.props.login(this.state.username, this.state.password)
+            }>
+            Login
+          </Button>
+        </Paper>
+>>>>>>> 21cf680809e83bfa800d94307f12c5a4f413b74e
       </div>
     )
   }
