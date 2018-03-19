@@ -18,8 +18,11 @@ import { Header } from "./Layouts"
 // User actions
 import {login, logout, checkLoggedIn} from '../actions/userActions'
 
-// Products userActions
-import {fetchProducts, setSelectedProduct, addToCart} from '../actions/productsActions'
+// Products actions
+import {fetchProducts} from '../actions/productsActions'
+
+// Cart actions
+import {addToCart, openCart, closeCart} from '../actions/cartActions'
 
 // Alert actions
 import {
@@ -38,17 +41,22 @@ class App extends React.Component {
     this.props.dispatch(logout())
   }
 
-  setSelectedProduct = (id) => {
-    this.props.dispatch(setSelectedProduct(id))
-  }
-
   //Products functions
   fetchProducts = () => {
     this.props.dispatch(fetchProducts())
   }
 
+  //Cart functions
   addToCart = (id) => {
     this.props.dispatch(addToCart(id))
+  }
+
+  openCart = () => {
+    this.props.dispatch(openCart())
+  }
+
+  closeCart = () => {
+    this.props.dispatch(closeCart())
   }
 
   // Alert functions
@@ -78,7 +86,10 @@ class App extends React.Component {
           <div>
             <Header
               user={this.props.state.user}
+              cart={this.props.state.cart}
               logout={this.logout}
+              openCart={this.openCart}
+              closeCart={this.closeCart}
             />
 
             <Route exact path='/' render={(props) => (

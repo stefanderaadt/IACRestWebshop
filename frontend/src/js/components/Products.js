@@ -18,7 +18,7 @@ class Products extends React.Component {
 
           {this.props.products.all.map(function(item, i){
             return (
-              <Paper style={styles.paper}>
+              <Paper key={item.id} style={styles.paper}>
                 { item.name }
                 <Button
                   onClick={
@@ -29,14 +29,6 @@ class Products extends React.Component {
               </Paper>
             )
           }, this)}
-
-          {this.props.products.cart.map(function(item, i){
-            return(
-              <div>
-                {item.name}
-              </div>
-            )
-          },this)}
 
         </div>
       </div>

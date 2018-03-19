@@ -14,16 +14,6 @@ export function fetchProducts() {
   }
 }
 
-export function setSelectedProduct(id){
-  return {
-    type: "SET_SELECTED_PRODUCT",
-    payload: id
-  }
-}
-
-export function addToCart(item){
-  return{
-    type: "ADD_TO_CART",
-    payload: item
-  }
+export function fetchProduct(id) {
+  return {type: "FETCH_PRODUCT", payload: id}
 }
