@@ -25,11 +25,11 @@ class Header extends React.Component {
           <Typography variant="title" color="inherit" style={ styles.flex }>
             WebShop
           </Typography>
+          <Button component={ Link } to="/" color="inherit">Home</Button>
+          <Button component={ Link } to="/products" color="inherit">Products</Button>
 
           {this.props.user.loggedIn ? (
             <Fragment>
-              <Button component={ Link } to="/" color="inherit">Home</Button>
-              <Button component={ Link } to="/products" color="inherit">Products</Button>
               <Button component={ Link } to="/login" onClick={this.props.logout} color="inherit">Logout</Button>
             </Fragment>
           ) : (
