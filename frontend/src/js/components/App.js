@@ -88,14 +88,7 @@ class App extends React.Component {
             <Route path='/login' render={(props) => (
               <LoginPage {...props}
                 state={this.props.state}
-                login={this.login}
-<<<<<<< HEAD
-                logout={this.logout}
-                successAlert={this.successAlert}
-                errorAlert={this.errorAlert}/>
-=======
-                logout={this.logout}/>
->>>>>>> 21cf680809e83bfa800d94307f12c5a4f413b74e
+                login={this.login}/>
             )} />
             <Route path='/products' render={(props) => (
               <Products {...props}
