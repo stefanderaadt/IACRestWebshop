@@ -1,6 +1,6 @@
 const defaultState = {
     all: [],
-    open: true
+    open: false
 }
 
 export default function reducer(state=defaultState, action) {

@@ -19,7 +19,23 @@ const styles = {
 };
 
 class Header extends React.Component {
+
+  state = {
+    anchorEl: null,
+  };
+
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   render() {
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+
     return(
       <AppBar position="static" style={{ backgroundColor: "#2196F3" }}>
         <Toolbar>
@@ -38,15 +54,15 @@ class Header extends React.Component {
                   <Button
                     component={ Link }
                     to="/login"
-                    onClick={this.props.logout}
+                    onClick={ this.props.logout }
                     color="inherit">
                     Logout
                   </Button>
                 </Fragment>
                 <IconButton
-                  aria-owns={this.props.cart.open ? 'menu-appbar' : null}
+                  aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
-                  onClick={this.props.openCart}
+                  onClick={ this.handleMenu }
                   color="inherit">
                   <ShoppingCart>
                     shopping_cart
@@ -54,6 +70,7 @@ class Header extends React.Component {
                 </IconButton>
                 <Menu
                   id="menu-appbar"
+                  anchorEl={anchorEl}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
@@ -62,10 +79,10 @@ class Header extends React.Component {
                     vertical: 'top',
                     horizontal: 'right',
                   }}
-                  open={this.props.cart.open}
-                  onClose={this.props.closeCart}
+                  open={ open }
+                  onClose={ this.handleClose }
                 >
-                  <Cart cart={this.props.cart}/>
+                  <Cart cart={ this.props.cart }/>
                 </Menu>
               </div>
           ) : (

@@ -29,14 +29,14 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div style={{padding: '12px',  textAlign: 'center'}}>
-        <Paper style={styles.paper}>
+        <Paper style={ styles.paper }>
           <TextField
             label="Username"
-            onChange={this.onUsernameChange}/>
+            onChange={ this.onUsernameChange }/>
           <TextField
             type="password"
             label="Password"
-            onChange={this.onPasswordChange}/>
+            onChange={ this.onPasswordChange }/>
           <Button
             label="Login"
             onClick={
