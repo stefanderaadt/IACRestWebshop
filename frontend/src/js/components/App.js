@@ -47,8 +47,8 @@ class App extends React.Component {
   }
 
   //Cart functions
-  addToCart = (id) => {
-    this.props.dispatch(addToCart(id))
+  addToCart = (id, amount) => {
+    this.props.dispatch(addToCart(id, amount))
   }
 
   openCart = () => {

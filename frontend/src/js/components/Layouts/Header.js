@@ -33,16 +33,14 @@ class Header extends React.Component {
           <Button component={ Link } to="/products" color="inherit">Products</Button>
 
           {this.props.user.loggedIn ? (
-              <div>
-                <Fragment>
-                  <Button
+              <Fragment>
+                <Button
                     component={ Link }
                     to="/login"
                     onClick={this.props.logout}
                     color="inherit">
                     Logout
-                  </Button>
-                </Fragment>
+                </Button>
                 <IconButton
                   aria-owns={this.props.cart.open ? 'menu-appbar' : null}
                   aria-haspopup="true"
@@ -63,11 +61,10 @@ class Header extends React.Component {
                     horizontal: 'right',
                   }}
                   open={this.props.cart.open}
-                  onClose={this.props.closeCart}
-                >
+                  onClose={this.props.closeCart}>
                   <Cart cart={this.props.cart}/>
                 </Menu>
-              </div>
+              </Fragment>
           ) : (
             <Fragment>
               <Button component={ Link } to="/login" color="inherit">Login</Button>
