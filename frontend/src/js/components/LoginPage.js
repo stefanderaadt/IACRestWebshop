@@ -46,7 +46,7 @@ class LoginPage extends React.Component {
           label="Primary"
           primary={true}
           onClick={
-            () => this.props.displaySuccessAlert("Test success")
+            () => this.props.successAlert("Test success")
           }>
           Success
         </Button>
@@ -55,7 +55,7 @@ class LoginPage extends React.Component {
           label="Primary"
           primary={true}
           onClick={
-            () => this.props.displayErrorAlert("Test error")
+            () => this.props.errorAlert("Test error")
           }>
           Error
         </Button>

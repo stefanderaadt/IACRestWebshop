@@ -76,8 +76,8 @@ class App extends React.Component {
                 state={this.props.state}
                 login={this.login}
                 logout={this.logout}
-                displaySuccessAlert={this.displaySuccessAlert}
-                displayErrorAlert={this.displayErrorAlert}/>
+                successAlert={this.successAlert}
+                errorAlert={this.errorAlert}/>
             )} />
             <Route path='/products' render={(props) => (
               <Products {...props}
