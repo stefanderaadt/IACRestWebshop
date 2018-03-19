@@ -1,5 +1,6 @@
 const defaultState = {
-    products: [],
+    all: [],
+    cart: [],
     fetching: false,
     fetched: true,
     selectedProduct: null
@@ -19,7 +20,7 @@ export default function reducer(state=defaultState, action) {
           ...state,
           fetching: false,
           fetched: true,
-          products: action.payload,
+          all: action.payload,
         }
       }
       case "SET_SELECTED_PRODUCT":{
@@ -28,7 +29,15 @@ export default function reducer(state=defaultState, action) {
           selectedProduct: action.payload
         }
       }
+      case "ADD_TO_CART":{
+        return{
+          ...state,
+          cart: [ ...state.cart, action.payload ]
+        }
+      }
+      default:{
+        return state
+      }
     }
 
-    return state
 }

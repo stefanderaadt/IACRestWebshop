@@ -46,7 +46,8 @@ export default function reducer(state=defaultState, action) {
           error: null
         }
       }
+      default:{
+        return state
+      }
     }
-
-    return state
 }

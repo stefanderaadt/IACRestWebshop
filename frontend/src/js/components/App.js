@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import {
   Router,
   Route,
-  Redirect,
 } from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
 
@@ -18,7 +17,7 @@ import LoginPage from "./LoginPage"
 import {login, logout, checkLoggedIn} from '../actions/userActions'
 
 // Products userActions
-import {fetchProducts, setSelectedProduct} from '../actions/productsActions'
+import {fetchProducts, setSelectedProduct, addToCart} from '../actions/productsActions'
 
 // Alert actions
 import {
@@ -41,6 +40,15 @@ class App extends React.Component {
     this.props.dispatch(setSelectedProduct(id))
   }
 
+  //Products functions
+  fetchProducts = () => {
+    this.props.dispatch(fetchProducts())
+  }
+
+  addToCart = (id) => {
+    this.props.dispatch(addToCart(id))
+  }
+
   // Alert functions
   successAlert = (message) =>{
     this.props.dispatch(successAlertAction(message))
@@ -58,7 +66,6 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    props.dispatch(fetchProducts())
     props.dispatch(checkLoggedIn())
   }
 
@@ -81,9 +88,11 @@ class App extends React.Component {
             )} />
             <Route path='/products' render={(props) => (
               <Products {...props}
-                state={this.props.state}
-                setSelectedProduct={this.setSelectedProduct}/>
-            )} />
+                products={this.props.state.products}
+                setSelectedProduct={this.setSelectedProduct}
+                fetchProducts={this.fetchProducts}
+                addToCart={this.addToCart}/>
+            )}/>
             <Route path='/product/:id' render={(props) => (
               <Product {...props}
                 state={this.props.state}/>

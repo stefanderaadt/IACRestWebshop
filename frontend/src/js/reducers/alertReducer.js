@@ -32,7 +32,8 @@ export default function reducer(state=defaultState, action) {
           backgroundColor: ""
         }
       }
+      default:{
+        return state
+      }
     }
-
-    return state
 }

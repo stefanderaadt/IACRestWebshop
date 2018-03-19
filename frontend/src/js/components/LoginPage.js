@@ -1,8 +1,6 @@
 import React from "react"
 import {TextField, Button} from 'material-ui'
 
-import { Header, Content } from './Layouts'
-
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -24,9 +22,11 @@ class LoginPage extends React.Component {
     return (
       <div>
         <TextField
+          label="Username"
           onChange={this.onUsernameChange}/>
         <TextField
           type="password"
+          label="Password"
           onChange={this.onPasswordChange}/>
         <Button
           label="Login"
@@ -44,7 +44,6 @@ class LoginPage extends React.Component {
 
         <Button
           label="Primary"
-          primary={true}
           onClick={
             () => this.props.successAlert("Test success")
           }>
@@ -53,7 +52,6 @@ class LoginPage extends React.Component {
 
         <Button
           label="Primary"
-          primary={true}
           onClick={
             () => this.props.errorAlert("Test error")
           }>
