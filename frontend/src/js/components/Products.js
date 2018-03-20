@@ -1,9 +1,41 @@
 import React from "react"
-import { Paper, Button, Typography } from 'material-ui'
+import { Paper, Input, Button, Typography } from 'material-ui'
 
 class Products extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      amount: []
+    }
+  }
+
   componentDidMount(){
     this.props.fetchProducts()
+  }
+
+  amountChange = (e, id) => {
+    const value = e.target.value
+
+    if(value > 10 || value < 0) return
+
+    this.setState((prevState, props) => {
+      const index = prevState.amount.findIndex(x => x.id === id)
+
+      if(index === -1){
+        // Create new amount for object
+        return {amount: [...prevState.amount, {id: id, amount: value}]}
+      }else{
+        //  Get new amount array
+        const newAmount = [...prevState.amount]
+
+        // Set new value in object in array and create new object
+        newAmount[index] = {...newAmount[index], amount: value}
+
+        // Return new array with new object
+        return {amount: newAmount}
+      }
+
+    })
   }
 
   render() {
@@ -17,12 +49,25 @@ class Products extends React.Component {
           </Typography>
 
           {this.props.products.all.map(function(item, i){
+            var amount
+
+            if (this.state.amount.find(x => x.id === item.id)) {
+              amount = this.state.amount.find(x => x.id === item.id).amount
+            }else{
+              amount = 1
+            }
+
             return (
               <Paper key={item.id} style={styles.paper}>
                 { item.name }
+                <Input
+                  type="number"
+                  label="Amount"
+                  value={amount}
+                  onChange={(e) => {this.amountChange(e, item.id)}}/>
                 <Button
                   onClick={
-                    () => this.props.addToCart(item)
+                    () => this.props.addToCart(item, amount)
                   }>
                   Add to cart
                 </Button>

@@ -39,9 +39,6 @@ class Header extends React.Component {
     return(
       <AppBar position="static" style={{ backgroundColor: "#2196F3" }}>
         <Toolbar>
-          <IconButton style={ styles.menuButton } color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
           <Typography variant="title" color="inherit" style={ styles.flex }>
             WebShop
           </Typography>
@@ -49,16 +46,14 @@ class Header extends React.Component {
           <Button component={ Link } to="/products" color="inherit">Products</Button>
 
           {this.props.user.loggedIn ? (
-              <div>
-                <Fragment>
-                  <Button
+              <Fragment>
+                <Button
                     component={ Link }
                     to="/login"
                     onClick={ this.props.logout }
                     color="inherit">
                     Logout
-                  </Button>
-                </Fragment>
+                </Button>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
@@ -84,7 +79,7 @@ class Header extends React.Component {
                 >
                   <Cart cart={ this.props.cart }/>
                 </Menu>
-              </div>
+              </Fragment>
           ) : (
             <Fragment>
               <Button component={ Link } to="/login" color="inherit">Login</Button>
