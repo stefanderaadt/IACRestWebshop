@@ -28,19 +28,27 @@ export default function reducer(state=defaultState, action) {
           all[index] = {
             ...all[index],
             product: {...product, newProduct},
-            amount: all[index].amount + action.payload.amount
+            amount: parseInt(all[index].amount) + parseInt(action.payload.amount)
           }
 
           // Return new array with new objects
           return {...state, all: all}
         }
 
-
-
         return{
           ...state,
           all: [ ...state.all, action.payload ]
         }
+      }
+      case "REMOVE_FROM_CART":{
+        // Get right constants
+        const all = [...state.all]
+
+        // Remove item with given index from array
+        all.splice(action.payload.index, 1);
+
+        // Retrun updated array
+        return {...state, all: all}
       }
       case "OPEN_CART":{
         return{

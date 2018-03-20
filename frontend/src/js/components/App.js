@@ -22,7 +22,7 @@ import {login, logout, checkLoggedIn} from '../actions/userActions'
 import {fetchProducts} from '../actions/productsActions'
 
 // Cart actions
-import {addToCart, openCart, closeCart} from '../actions/cartActions'
+import {addToCart, openCart, closeCart, removeFromCart} from '../actions/cartActions'
 
 // Alert actions
 import {
@@ -49,6 +49,10 @@ class App extends React.Component {
   //Cart functions
   addToCart = (id, amount) => {
     this.props.dispatch(addToCart(id, amount))
+  }
+
+  removeFromCart = (index) => {
+    this.props.dispatch(removeFromCart(index))
   }
 
   openCart = () => {
@@ -90,6 +94,7 @@ class App extends React.Component {
               logout={this.logout}
               openCart={this.openCart}
               closeCart={this.closeCart}
+              remove={this.removeFromCart}
             />
 
             <Route exact path='/' render={(props) => (
@@ -128,7 +133,6 @@ class App extends React.Component {
           message={this.props.state.alert.message}
           autoHideDuration={4000}
           onClose={this.hideAlert}
-          bodyStyle={{ backgroundColor: 'teal', color: 'coral' }}
         />
       </div>
     )

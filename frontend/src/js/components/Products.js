@@ -1,5 +1,5 @@
 import React from "react"
-import { Paper, Input, Button, Typography } from 'material-ui'
+import { Paper, Input, Button, Typography, Grid } from 'material-ui'
 
 class Products extends React.Component {
   constructor(props) {
@@ -59,18 +59,39 @@ class Products extends React.Component {
 
             return (
               <Paper key={item.id} style={styles.paper}>
-                { item.name }
-                <Input
-                  type="number"
-                  label="Amount"
-                  value={amount}
-                  onChange={(e) => {this.amountChange(e, item.id)}}/>
-                <Button
-                  onClick={
-                    () => this.props.addToCart(item, amount)
-                  }>
-                  Add to cart
-                </Button>
+                <Grid container spacing={24}>
+
+                  <Grid style={{display: 'flex', flexDirection: 'column'}}
+                    item xs={12} sm={6}
+                  >
+                    <div style={{fontWeight: 'bold'}}>
+                      { item.name }
+                    </div>
+                    <div>
+                      { item.description }
+                    </div>
+                    <div>
+                      ${ item.price }
+                    </div>
+                  </Grid>
+
+                  <Grid style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+                    item xs={12} sm={6}
+                  >
+                    <Input
+                      type="number"
+                      label="Amount"
+                      value={amount}
+                      onChange={(e) => {this.amountChange(e, item.id)}}/>
+                    <Button
+                      onClick={
+                        () => this.props.addToCart(item, amount)
+                      }>
+                      Add to cart
+                    </Button>
+                  </Grid>
+
+                </Grid>
               </Paper>
             )
           }, this)}
@@ -85,6 +106,8 @@ const styles = {
   paper: {
     padding: '12px',
     marginTop: '12px',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 }
 

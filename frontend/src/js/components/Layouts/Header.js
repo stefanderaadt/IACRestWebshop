@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton } from 'material-ui';
-import MenuIcon from 'material-ui-icons/Menu';
 import { Link } from "react-router-dom";
-import Icon from 'material-ui/Icon';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import Menu from 'material-ui/Menu';
 import ShoppingCart from 'material-ui-icons/ShoppingCart';
 
 import Cart from '../ShoppingCart';
@@ -77,7 +75,7 @@ class Header extends React.Component {
                   open={ open }
                   onClose={ this.handleClose }
                 >
-                  <Cart cart={ this.props.cart }/>
+                  <Cart cart={ this.props.cart } remove={ this.props.remove }/>
                 </Menu>
               </Fragment>
           ) : (

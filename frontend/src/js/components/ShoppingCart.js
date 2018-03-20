@@ -1,9 +1,11 @@
 import React, { Fragment } from "react"
+import { IconButton, Button } from 'material-ui';
+import Close from 'material-ui-icons/Close';
 
 const styles = {
   wrapper: {
     padding: '12px',
-    width: '300px'
+    width: '400px'
   },
   hr: {
     display: 'block',
@@ -12,6 +14,16 @@ const styles = {
     borderTop: '2px solid #E0E0E0',
     margin: '1em 0',
     padding: 0,
+  },
+  rowWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  buttonWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 }
 
@@ -20,7 +32,7 @@ class ShoppingCart extends React.Component {
     return (
       <div style={ styles.wrapper }>
 
-        {this.props.cart.all.length == 0 ? (
+        {this.props.cart.all.length === 0 ? (
           <div style={{textAlign: 'center'}}>
             Shopping Cart empty
           </div>
@@ -28,18 +40,37 @@ class ShoppingCart extends React.Component {
           <Fragment>
             {this.props.cart.all.map(function(item, i){
               return(
-                <div>
-                  {item.name}
+                <div key={item.product.id} style={styles.rowWrapper}>
+                  <div style={{paddingLeft: '12px'}}>
+                    { item.product.name }
+                  </div>
+                  <div style={styles.buttonWrapper}>
+                    { item.amount } x ${ item.product.price }
+                    <IconButton onClick={
+                      () => this.props.remove(i)
+                    }>
+                      <Close style={{color: 'tomato'}}>
+                        close
+                      </Close>
+                    </IconButton>
+                  </div>
                 </div>
               )
             },this)}
           </Fragment>
         )}
 
-        {this.props.cart.all.length == 0 ? (
+        {this.props.cart.all.length === 0 ? (
           null
         ) : (
-          <hr style={styles.hr}/>
+          <Fragment>
+            <hr style={styles.hr}/>
+            <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
+              <Button>
+                Order
+              </Button>
+            </div>
+          </Fragment>
         )}
 
       </div>
