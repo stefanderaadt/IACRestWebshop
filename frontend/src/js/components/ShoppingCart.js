@@ -28,6 +28,16 @@ const styles = {
 }
 
 class ShoppingCart extends React.Component {
+  getTotalPrice = (all) => {
+    var total = 0
+
+    all.forEach(function(row) {
+      total += row.amount * row.product.price
+    })
+
+    return total
+  }
+
   render() {
     return (
       <div style={ styles.wrapper }>
@@ -66,6 +76,9 @@ class ShoppingCart extends React.Component {
           <Fragment>
             <hr style={styles.hr}/>
             <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
+              <div>
+                ${this.getTotalPrice(this.props.cart.all)}
+              </div>
               <Button>
                 Order
               </Button>

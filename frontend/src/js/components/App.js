@@ -83,6 +83,10 @@ class App extends React.Component {
     props.dispatch(checkLoggedIn())
   }
 
+  componentDidMount(){
+    this.fetchProducts()
+  }
+
   render() {
     return (
       <div>
@@ -94,12 +98,13 @@ class App extends React.Component {
               logout={this.logout}
               openCart={this.openCart}
               closeCart={this.closeCart}
-              remove={this.removeFromCart}
-            />
+              remove={this.removeFromCart} />
 
             <Route exact path='/' render={(props) => (
               <Home {...props}
-                state={this.props.state}/>
+                state={this.props.state}
+                products={this.props.state.products}
+                addToCart={this.addToCart}/>
             )} />
             <Route path='/login' render={(props) => (
               <LoginPage {...props}
@@ -109,8 +114,6 @@ class App extends React.Component {
             <Route path='/products' render={(props) => (
               <Products {...props}
                 products={this.props.state.products}
-                setSelectedProduct={this.setSelectedProduct}
-                fetchProducts={this.fetchProducts}
                 addToCart={this.addToCart}/>
             )}/>
             <Route path='/product/:id' render={(props) => (

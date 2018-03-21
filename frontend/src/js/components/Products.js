@@ -1,5 +1,7 @@
-import React from "react"
+import React, {Fragment} from "react"
 import { Paper, Input, Button, Typography, Grid } from 'material-ui'
+
+import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage} from "../helpers/ProductHelper"
 
 class Products extends React.Component {
   constructor(props) {
@@ -7,10 +9,6 @@ class Products extends React.Component {
     this.state = {
       amount: []
     }
-  }
-
-  componentDidMount(){
-    this.props.fetchProducts()
   }
 
   amountChange = (e, id) => {
@@ -34,16 +32,13 @@ class Products extends React.Component {
         // Return new array with new object
         return {amount: newAmount}
       }
-
     })
   }
 
   render() {
     return (
       <div>
-
         <div style={{padding: '12px'}}>
-
           <Typography variant="display1">
             products
           </Typography>
@@ -71,7 +66,12 @@ class Products extends React.Component {
                       { item.description }
                     </div>
                     <div>
-                      ${ item.price }
+                      {isToday(item.discounts)? (
+                        <Fragment><span style={{color: 'red'}}>
+                          ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
+                        ) : (
+                        <Fragment>${ item.price }</Fragment>
+                      )}
                     </div>
                   </Grid>
 

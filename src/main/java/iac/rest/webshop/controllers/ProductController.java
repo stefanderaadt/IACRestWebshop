@@ -58,8 +58,6 @@ public class ProductController {
 
 	@PutMapping("/{id}")
 	public void editProduct(@PathVariable long id, @RequestBody Product product) {
-	    System.out.println("PUT PUT PUT");
-
 		Product existingProduct = productRepository.getOne(id);
 
 		Assert.notNull(existingProduct, "Product not found");
