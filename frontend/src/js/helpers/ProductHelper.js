@@ -24,3 +24,17 @@ export function getCurrentDiscountPercentage(discounts){
       (today<new Date(discounts[i].endDate))) return discounts[i].discountPercentage
   }
 }
+
+export function getTotalCartPrice(all){
+    var total = 0
+
+    all.forEach(function(row) {
+      if(isToday(row.product.discounts)){
+        total += row.amount * getDiscountedProductPrice(row.product)
+      }else{
+        total += row.amount * row.product.price
+      }
+    })
+
+    return total
+  }
