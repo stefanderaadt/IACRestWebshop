@@ -2,7 +2,12 @@ import React, { Fragment } from "react"
 import { Paper, Input, Button, Typography, Grid } from 'material-ui'
 import { Link } from 'react-router-dom'
 
-import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage} from "../helpers/ProductHelper"
+import {
+  isToday,
+  getDiscountedProductPrice,
+  getCurrentDiscountPercentage,
+  getCurrentDiscountBeginEnd
+} from "../helpers/ProductHelper"
 
 class Home extends React.Component {
   constructor(props) {
@@ -68,7 +73,9 @@ class Home extends React.Component {
                       <div>
                         {isToday(item.discounts)? (
                           <Fragment><span style={{color: 'red'}}>
-                            ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
+                            ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}<br/>
+                            {getCurrentDiscountBeginEnd(item.discounts)}
+                          </Fragment>
                           ) : (
                           <Fragment>${ item.price }</Fragment>
                         )}
@@ -129,7 +136,9 @@ class Home extends React.Component {
                       <div>
                         {isToday(item.discounts)? (
                           <Fragment><span style={{color: 'red'}}>
-                            ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
+                            ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}<br />
+                            {getCurrentDiscountBeginEnd(item.discounts)}
+                          </Fragment>
                           ) : (
                           <Fragment>${ item.price }</Fragment>
                         )}

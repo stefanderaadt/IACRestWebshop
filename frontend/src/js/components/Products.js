@@ -2,7 +2,12 @@ import React, {Fragment} from "react"
 import { Paper, Input, Button, Typography, Grid } from 'material-ui'
 import { Link } from 'react-router-dom'
 
-import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage} from "../helpers/ProductHelper"
+import {
+  isToday,
+  getDiscountedProductPrice,
+  getCurrentDiscountPercentage,
+  getCurrentDiscountBeginEnd
+} from "../helpers/ProductHelper"
 
 class Products extends React.Component {
   constructor(props) {
@@ -67,8 +72,10 @@ class Products extends React.Component {
                       </div>
                       <div>
                         {isToday(item.discounts)? (
-                          <Fragment><span style={{color: 'red'}}>
-                            ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
+                            <Fragment><span style={{color: 'red'}}>
+                              ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}<br />
+                              {getCurrentDiscountBeginEnd(item.discounts)}
+                            </Fragment>
                           ) : (
                           <Fragment>${ item.price }</Fragment>
                         )}
