@@ -69,7 +69,7 @@ class Order extends React.Component {
           null
         ) : (
           <Fragment>
-            <div style={{display: 'flex', justifyContent: 'flex-end', padding: '12px', paddingRight: '24px'}}>
+            <div style={{display: 'flex', justifyContent: 'flex-end', padding: '12px', paddingRight: '34px'}}>
               <b style={{paddingRight: '12px'}}>Total:</b> ${getTotalCartPrice(this.props.cart.all)}
             </div>
             <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
