@@ -1,6 +1,8 @@
 import React, { Fragment } from "react"
-import { IconButton, Button } from 'material-ui';
-import Close from 'material-ui-icons/Close';
+import { IconButton, Button } from 'material-ui'
+import Close from 'material-ui-icons/Close'
+
+import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage, getTotalCartPrice} from "../helpers/ProductHelper"
 
 const styles = {
   wrapper: {
@@ -28,16 +30,6 @@ const styles = {
 }
 
 class ShoppingCart extends React.Component {
-  getTotalPrice = (all) => {
-    var total = 0
-
-    all.forEach(function(row) {
-      total += row.amount * row.product.price
-    })
-
-    return total
-  }
-
   render() {
     return (
       <div style={ styles.wrapper }>
@@ -55,7 +47,14 @@ class ShoppingCart extends React.Component {
                     { item.product.name }
                   </div>
                   <div style={styles.buttonWrapper}>
-                    { item.amount } x ${ item.product.price }
+                    { item.amount } x
+                    {isToday(item.product.discounts)? (
+                      <Fragment><span style={{color: 'tomato'}}>
+                        ${ item.product.price }</span> - (%{getCurrentDiscountPercentage(item.product.discounts)}) ${getDiscountedProductPrice(item.product)}</Fragment>
+                      ) : (
+                        <Fragment>${ item.product.price }</Fragment>
+                      )
+                    }
                     <IconButton onClick={
                       () => this.props.remove(i)
                     }>
@@ -77,7 +76,7 @@ class ShoppingCart extends React.Component {
             <hr style={styles.hr}/>
             <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
               <div>
-                ${this.getTotalPrice(this.props.cart.all)}
+                ${getTotalCartPrice(this.props.cart.all)}
               </div>
               <Button>
                 Order
