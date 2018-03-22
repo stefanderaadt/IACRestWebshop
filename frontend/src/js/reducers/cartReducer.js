@@ -1,6 +1,10 @@
 const defaultState = {
     all: [],
-    open: false
+    open: false,
+
+    ordering: false,
+    ordered: true,
+    error: null
 }
 
 export default function reducer(state=defaultState, action) {
@@ -56,15 +60,33 @@ export default function reducer(state=defaultState, action) {
           open: true
         }
       }
-    case "CLOSE_CART":{
+      case "CLOSE_CART":{
         return{
           ...state,
           open: false
+        }
+      }
+      case "COMPLETE_ORDER":{
+        return{
+          ...state,
+          ordering: false
+        }
+      }
+      case "COMPLETE_ORDER_REJECTED": {
+        return {...state, ordering: false, error: action.payload}
+      }
+      case "COMPLETE_ORDER_FULFILLED": {
+        return {
+          ...state,
+          ordering: false,
+          ordered: true,
         }
       }
       default:{
         return state
       }
     }
+
+
 
 }

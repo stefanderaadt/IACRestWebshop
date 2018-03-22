@@ -25,7 +25,13 @@ import {login, logout, checkLoggedIn} from '../actions/userActions'
 import {fetchProducts} from '../actions/productsActions'
 
 // Cart actions
-import {addToCart, openCart, closeCart, removeFromCart} from '../actions/cartActions'
+import {
+  addToCart,
+  openCart,
+  closeCart,
+  removeFromCart,
+  completeOrder
+} from '../actions/cartActions'
 
 // Alert actions
 import {
@@ -64,6 +70,10 @@ class App extends React.Component {
 
   closeCart = () => {
     this.props.dispatch(closeCart())
+  }
+
+  completeOrder = (order) => {
+    this.props.dispatch(completeOrder(order))
   }
 
   // Alert functions
@@ -127,7 +137,8 @@ class App extends React.Component {
               )}/>
               <Route path='/orders' render={(props) => (
                 <Order {...props}
-                  state={this.props.state}/>
+                  cart={this.props.state.cart}
+                  completeOrder={this.completeOrder}/>
               )}/>
               <PrivateRoute path='/orders/:id' render={(props) => (
                 <Product {...props}

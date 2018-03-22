@@ -32,6 +32,8 @@ public class OrderController {
 
 		order.setUser(user);
 
+		order.setAdress(user.getAdress());
+
         orderRepository.save(order);
 	}
 

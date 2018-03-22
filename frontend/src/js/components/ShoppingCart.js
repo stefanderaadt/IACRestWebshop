@@ -3,7 +3,12 @@ import { IconButton, Button } from 'material-ui'
 import Close from 'material-ui-icons/Close'
 import { Link } from "react-router-dom"
 
-import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage, getTotalCartPrice} from "../helpers/ProductHelper"
+import {
+  isToday,
+  getDiscountedProductPrice,
+  getCurrentDiscountPercentage,
+  getTotalCartPrice
+} from "../helpers/ProductHelper"
 
 const styles = {
   wrapper: {

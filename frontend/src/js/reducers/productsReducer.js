@@ -2,7 +2,8 @@ const defaultState = {
     all: [],
     fetching: false,
     fetched: true,
-    selectedProduct: null
+    selectedProduct: null,
+    error: null
 }
 
 export default function reducer(state=defaultState, action) {
