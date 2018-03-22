@@ -1,13 +1,13 @@
 import React from "react"
 
-class Product extends React.Component {
+class Order extends React.Component {
   render() {
     return (
       <div>
-        product
+        orders
       </div>
     )
   }
 }
 
-export default Product
+export default Order

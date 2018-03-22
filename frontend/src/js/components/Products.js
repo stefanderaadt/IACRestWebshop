@@ -80,7 +80,6 @@ class Products extends React.Component {
                     <Input style={{width: '50px'}}
                       type="number"
                       value={amount}
-                      helperText="Some important text"
                       onChange={(e) => {this.amountChange(e.target.value, item.id)}}/>
                     <Button style={{marginLeft: '12px'}}
                       onClick={

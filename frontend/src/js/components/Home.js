@@ -74,10 +74,11 @@ class Home extends React.Component {
                     </div>
                   </Grid>
 
-                  <Grid style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+                  <Grid style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}
                     item xs={12} sm={6}
                   >
-                    <Input
+                  <div style={{marginRight: '20px'}}> Amount: </div>
+                    <Input style={{width: '50px'}}
                       type="number"
                       label="Amount"
                       value={amount}

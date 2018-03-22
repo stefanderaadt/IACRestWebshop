@@ -1,8 +1,9 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { connect } from "react-redux"
 import {
   Router,
   Route,
+  Switch,
 } from 'react-router-dom'
 import Snackbar from 'material-ui/Snackbar'
 
@@ -12,6 +13,8 @@ import Home from "./Home"
 import Product from "./Product"
 import Products from "./Products"
 import LoginPage from "./LoginPage"
+import Order from "./Order"
+import Vier from "./404"
 
 import { Header } from "./Layouts"
 
@@ -91,14 +94,16 @@ class App extends React.Component {
     return (
       <div>
         <Router history={history}>
-          <div>
-            <Header
-              user={this.props.state.user}
-              cart={this.props.state.cart}
-              logout={this.logout}
-              openCart={this.openCart}
-              closeCart={this.closeCart}
-              remove={this.removeFromCart} />
+        <Fragment>
+        <Header
+        user={this.props.state.user}
+        cart={this.props.state.cart}
+        logout={this.logout}
+        openCart={this.openCart}
+        closeCart={this.closeCart}
+        remove={this.removeFromCart} />
+
+          <Switch>
 
             <Route exact path='/' render={(props) => (
               <Home {...props}
@@ -120,16 +125,19 @@ class App extends React.Component {
               <Product {...props}
                 state={this.props.state}/>
             )}/>
-
-            <PrivateRoute path='/orders' render={(props) => (
-              <Product {...props}
+            <Route path='/orders' render={(props) => (
+              <Order {...props}
                 state={this.props.state}/>
             )}/>
             <PrivateRoute path='/orders/:id' render={(props) => (
               <Product {...props}
                 state={this.props.state}/>
             )}/>
-          </div>
+            <Route path='*' render={(props) => (
+              <Vier {...props}/>
+            )}/>
+          </Switch>
+          </Fragment>
         </Router>
         <Snackbar
           open={this.props.state.alert.alert}
