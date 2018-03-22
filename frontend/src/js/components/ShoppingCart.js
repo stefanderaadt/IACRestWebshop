@@ -74,11 +74,11 @@ class ShoppingCart extends React.Component {
           null
         ) : (
           <Fragment>
+            <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '48px'}}>
+              <b style={{paddingRight: '12px'}}>Total:</b> ${this.getTotalPrice(this.props.cart.all)}
+            </div>
             <hr style={styles.hr}/>
             <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
-              <div>
-                ${this.getTotalPrice(this.props.cart.all)}
-              </div>
               <Button>
                 Order
               </Button>
