@@ -95,48 +95,48 @@ class App extends React.Component {
       <div>
         <Router history={history}>
         <Fragment>
-        <Header
-        user={this.props.state.user}
-        cart={this.props.state.cart}
-        logout={this.logout}
-        openCart={this.openCart}
-        closeCart={this.closeCart}
-        remove={this.removeFromCart} />
+          <Header
+            user={this.props.state.user}
+            cart={this.props.state.cart}
+            logout={this.logout}
+            openCart={this.openCart}
+            closeCart={this.closeCart}
+            remove={this.removeFromCart} />
 
-          <Switch>
+            <Switch>
 
-            <Route exact path='/' render={(props) => (
-              <Home {...props}
-                state={this.props.state}
-                products={this.props.state.products}
-                addToCart={this.addToCart}/>
-            )} />
-            <Route path='/login' render={(props) => (
-              <LoginPage {...props}
-                state={this.props.state}
-                login={this.login}/>
-            )} />
-            <Route path='/products' render={(props) => (
-              <Products {...props}
-                products={this.props.state.products}
-                addToCart={this.addToCart}/>
-            )}/>
-            <Route path='/product/:id' render={(props) => (
-              <Product {...props}
-                state={this.props.state}/>
-            )}/>
-            <Route path='/orders' render={(props) => (
-              <Order {...props}
-                state={this.props.state}/>
-            )}/>
-            <PrivateRoute path='/orders/:id' render={(props) => (
-              <Product {...props}
-                state={this.props.state}/>
-            )}/>
-            <Route path='*' render={(props) => (
-              <Vier {...props}/>
-            )}/>
-          </Switch>
+              <Route exact path='/' render={(props) => (
+                <Home {...props}
+                  state={this.props.state}
+                  products={this.props.state.products}
+                  addToCart={this.addToCart}/>
+              )} />
+              <Route path='/login' render={(props) => (
+                <LoginPage {...props}
+                  state={this.props.state}
+                  login={this.login}/>
+              )} />
+              <Route path='/products' render={(props) => (
+                <Products {...props}
+                  products={this.props.state.products}
+                  addToCart={this.addToCart}/>
+              )}/>
+              <Route path='/product/:id' render={(props) => (
+                <Product {...props}
+                  state={this.props.state}/>
+              )}/>
+              <Route path='/orders' render={(props) => (
+                <Order {...props}
+                  state={this.props.state}/>
+              )}/>
+              <PrivateRoute path='/orders/:id' render={(props) => (
+                <Product {...props}
+                  state={this.props.state}/>
+              )}/>
+              <Route path='*' render={(props) => (
+                <Vier {...props}/>
+              )}/>
+            </Switch>
           </Fragment>
         </Router>
         <Snackbar

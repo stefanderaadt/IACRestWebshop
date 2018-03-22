@@ -30,8 +30,6 @@ public class OrderController {
 	public void addOrder(@RequestBody ProductOrder order, Principal principal) {
 		ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
 
-		// Add new address to user check for id = 0
-
 		order.setUser(user);
 
         orderRepository.save(order);
