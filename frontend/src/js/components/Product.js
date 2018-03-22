@@ -82,9 +82,9 @@ class Product extends React.Component {
           </Grid>
         </Paper>
       ) : (
-        <Fragment>
-          <h3>Product: {this.props.match.params.id} not found!</h3>
-        </Fragment>
+        <div style={styles.center}>
+          Product not found
+        </div>
       )}
       </Fragment>
     )
@@ -98,6 +98,18 @@ const styles = {
     marginTop: '12px',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  center: {
+    position: 'absolute',
+    margin: 'auto',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    maxWidth: '250px',
+    height: '20px',
+    textAlign: 'center',
+    color: '#9E9E9E'
   },
 }
 
