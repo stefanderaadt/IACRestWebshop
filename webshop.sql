@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 15 mrt 2018 om 11:12
+-- Gegenereerd op: 22 mrt 2018 om 22:00
 -- Serverversie: 10.1.28-MariaDB
 -- PHP-versie: 7.1.11
 
@@ -103,7 +103,8 @@ CREATE TABLE `discount` (
 --
 
 INSERT INTO `discount` (`id`, `begin_date`, `end_date`, `product_id`, `discount_percentage`) VALUES
-(1, '2018-03-13 00:00:00', '2018-03-29 00:00:00', 1, 10);
+(1, '2018-03-13 00:00:00', '2018-03-29 00:00:00', 1, 10),
+(2, '2018-03-20 00:00:00', '2018-03-30 00:00:00', 5, 90);
 
 -- --------------------------------------------------------
 
@@ -116,19 +117,22 @@ CREATE TABLE `product` (
   `name` varchar(255) DEFAULT NULL,
   `price` float NOT NULL,
   `category_id` bigint(20) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `description`) VALUES
-(1, 'Ferrari', 800000, 1, 'Een snelle auto'),
-(4, 'Fiat', 10000, 1, 'Een minder snelle auto'),
-(5, 'Boeing 777', 9800000, 2, 'Vliegtuig'),
-(6, 'Airbus A300\r\nAirbus A310\r\n', 1828910, 2, 'Vliegtuig2'),
-(7, 'Boeing 787 Dreamliner\r\n', 833333000, 2, 'Vliegtuig3');
+INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `description`, `created_at`) VALUES
+(1, 'Ferrari', 800000, 1, 'Een snelle auto', '2018-03-16 00:00:00'),
+(4, 'Fiat', 10000, 1, 'Een minder snelle auto', '2018-03-01 00:00:00'),
+(5, 'Boeing 777', 9800000, 2, 'Vliegtuig', '2018-03-13 00:00:00'),
+(6, 'Airbus A300\r\nAirbus A310\r\n', 1828910, 2, 'Vliegtuig2', '2018-03-22 00:00:00'),
+(7, 'Boeing 787 Dreamliner\r\n', 833333000, 2, 'Vliegtuig3', '2018-03-21 00:00:00'),
+(11, 'BMW', 80000, 1, 'bmw', '2018-03-05 00:00:00'),
+(12, 'Citroen', 8000, 1, 'citroen', '2018-03-22 13:31:41');
 
 -- --------------------------------------------------------
 
@@ -148,7 +152,9 @@ CREATE TABLE `product_order` (
 
 INSERT INTO `product_order` (`id`, `adress_id`, `application_user_id`) VALUES
 (1, 1, 2),
-(7, 1, 1);
+(7, 1, 1),
+(8, 1, 1),
+(9, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -178,7 +184,9 @@ INSERT INTO `product_order_row` (`id`, `amount`, `product_id`, `order_id`) VALUE
 (8, 2, 1, 6),
 (9, 3, 4, 6),
 (10, 2, 1, 7),
-(11, 3, 4, 7);
+(11, 3, 4, 7),
+(12, 1, 1, 8),
+(13, 1, 1, 9);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -260,25 +268,25 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT voor een tabel `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT voor een tabel `product_order`
 --
 ALTER TABLE `product_order`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT voor een tabel `product_order_row`
 --
 ALTER TABLE `product_order_row`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
