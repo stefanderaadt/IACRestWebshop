@@ -75,15 +75,16 @@ class Products extends React.Component {
                     </div>
                   </Grid>
 
-                  <Grid style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+                  <Grid style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}
                     item xs={12} sm={6}
                   >
-                    <Input
+                    <div style={{marginRight: '20px'}}> Amount: </div>
+                    <Input style={{width: '50px'}}
                       type="number"
-                      label="Amount"
                       value={amount}
+                      helperText="Some important text"
                       onChange={(e) => {this.amountChange(e, item.id)}}/>
-                    <Button
+                    <Button style={{marginLeft: '12px'}}
                       onClick={
                         () => this.props.addToCart(item, amount)
                       }>
