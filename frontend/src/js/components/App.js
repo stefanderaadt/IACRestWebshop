@@ -13,7 +13,8 @@ import Home from "./Home"
 import Product from "./Product"
 import Products from "./Products"
 import LoginPage from "./LoginPage"
-import Order from "./Order"
+import Order from "./Orders/Order"
+import OrderSuccess from "./Orders/OrderSuccess"
 import Vier from "./404"
 
 import { Header } from "./Layouts"
@@ -22,7 +23,7 @@ import { Header } from "./Layouts"
 import {login, logout, checkLoggedIn} from '../actions/userActions'
 
 // Products actions
-import {fetchProducts} from '../actions/productsActions'
+import {fetchProducts, fetchNewProducts, fetchProduct} from '../actions/productsActions'
 
 // Cart actions
 import {
@@ -50,12 +51,13 @@ class App extends React.Component {
     this.props.dispatch(logout())
   }
 
-  //Products functions
-  fetchProducts = () => {
-    this.props.dispatch(fetchProducts())
+  // Products functions
+
+  fetchProduct = (id) => {
+    this.props.dispatch(fetchProduct(id))
   }
 
-  //Cart functions
+  // Cart functions
   addToCart = (id, amount) => {
     this.props.dispatch(addToCart(id, amount))
   }
@@ -97,7 +99,8 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    this.fetchProducts()
+    this.props.dispatch(fetchProducts())
+    this.props.dispatch(fetchNewProducts())
   }
 
   render() {
@@ -133,16 +136,17 @@ class App extends React.Component {
               )}/>
               <Route path='/product/:id' render={(props) => (
                 <Product {...props}
-                  state={this.props.state}/>
+                  products={this.props.state.products}
+                  fetchProduct={this.fetchProduct}
+                  addToCart={this.addToCart}/>
               )}/>
               <Route path='/orders' render={(props) => (
                 <Order {...props}
                   cart={this.props.state.cart}
                   completeOrder={this.completeOrder}/>
               )}/>
-              <PrivateRoute path='/orders/:id' render={(props) => (
-                <Product {...props}
-                  state={this.props.state}/>
+              <Route path='/order/success' render={(props) => (
+                <OrderSuccess {...props} />
               )}/>
               <Route path='*' render={(props) => (
                 <Vier {...props}/>

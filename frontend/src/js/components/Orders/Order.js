@@ -7,7 +7,7 @@ import {
   getDiscountedProductPrice,
   getCurrentDiscountPercentage,
   getTotalCartPrice
-} from "../helpers/ProductHelper"
+} from "../../helpers/ProductHelper"
 
 const styles = {
   hr: {

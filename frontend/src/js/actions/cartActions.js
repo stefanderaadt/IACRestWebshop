@@ -1,4 +1,5 @@
 import axios from "axios"
+import {history} from "../helpers/history"
 
 export function addToCart(product, amount){
   return function(dispatch) {
@@ -34,9 +35,15 @@ export function completeOrder(order) {
       }
     ).then((response) => {
       dispatch({type: "COMPLETE_ORDER_FULFILLED"})
+
+      //Go to success page
+      history.push("/order/success")
     })
     .catch((err) => {
       dispatch({type: "COMPLETE_ORDER_REJECTED", payload: err})
+
+      //Send error alert
+      dispatch({type: "DISPLAY_ERROR_ALERT",payload: "Something went wrong processing your order!"})
     })
   }
 }
