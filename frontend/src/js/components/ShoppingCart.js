@@ -1,6 +1,7 @@
 import React, { Fragment } from "react"
 import { IconButton, Button } from 'material-ui'
 import Close from 'material-ui-icons/Close'
+import { Link } from "react-router-dom"
 
 import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage, getTotalCartPrice} from "../helpers/ProductHelper"
 
@@ -78,7 +79,9 @@ class ShoppingCart extends React.Component {
             </div>
             <hr style={styles.hr}/>
             <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
-              <Button>
+              <Button
+                component={ Link }
+                to="/orders">
                 Order
               </Button>
             </div>
