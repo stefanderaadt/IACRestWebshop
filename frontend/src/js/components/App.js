@@ -121,14 +121,11 @@ class App extends React.Component {
                 state={this.props.state}/>
             )}/>
 
-            <PrivateRoute path='/orders' render={(props) => (
-              <Product {...props}
-                state={this.props.state}/>
+            <Route path='/orders' render={(props) => (
+              <h1 {...props}>test</h1>
             )}/>
-            <PrivateRoute path='/orders/:id' render={(props) => (
-              <Product {...props}
-                state={this.props.state}/>
-            )}/>
+
+            <Route path='*' exact={true} component={Home} />
           </div>
         </Router>
         <Snackbar
