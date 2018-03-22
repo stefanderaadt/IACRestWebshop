@@ -50,8 +50,8 @@ class ShoppingCart extends React.Component {
                   <div style={styles.buttonWrapper}>
                     { item.amount } x
                     {isToday(item.product.discounts)? (
-                      <Fragment><span style={{color: 'tomato'}}>
-                        ${ item.product.price }</span> - (%{getCurrentDiscountPercentage(item.product.discounts)}) ${getDiscountedProductPrice(item.product)}</Fragment>
+                      <Fragment><span style={{color: 'tomato', paddingLeft: '4px', paddingRight: '4px'}}>
+                        ${ item.product.price } </span> - (%{getCurrentDiscountPercentage(item.product.discounts)}) ${getDiscountedProductPrice(item.product)}</Fragment>
                       ) : (
                         <Fragment>${ item.product.price }</Fragment>
                       )
