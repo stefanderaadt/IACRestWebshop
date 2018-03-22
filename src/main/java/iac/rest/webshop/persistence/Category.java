@@ -20,7 +20,6 @@ public class Category {
 
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "category_id")
-    @JsonIgnore
 	private List<Product> products = new ArrayList<>();
 
 	protected Category() {}

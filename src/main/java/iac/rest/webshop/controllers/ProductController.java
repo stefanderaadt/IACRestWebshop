@@ -34,11 +34,13 @@ public class ProductController {
 	public void addProduct(@RequestBody Product product) {
         Category category = categoryRepository.getOne(product.getCategory().getId());
 
+        System.out.println(category);
+
         //Add category to product and product to category
         product.setCategory(category);
         category.getProducts().add(product);
 
-		productRepository.save(product);
+		//productRepository.save(product);
 	}
 
 	@GetMapping

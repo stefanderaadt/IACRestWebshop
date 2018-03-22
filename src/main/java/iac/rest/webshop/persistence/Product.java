@@ -2,12 +2,12 @@ package iac.rest.webshop.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,6 +32,7 @@ public class Product {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Category category;
 
 	protected Product() {}
@@ -73,6 +74,7 @@ public class Product {
 		this.discounts = discounts;
 	}
 
+    @JsonIgnore
 	public Category getCategory() {
 		return category;
 	}
