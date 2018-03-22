@@ -11,9 +11,7 @@ class Home extends React.Component {
     }
   }
 
-  amountChange = (e, id) => {
-    const value = e.target.value
-
+  amountChange = (value, id) => {
     if(value > 10 || value < 0) return
 
     this.setState((prevState, props) => {
@@ -83,10 +81,13 @@ class Home extends React.Component {
                       type="number"
                       label="Amount"
                       value={amount}
-                      onChange={(e) => {this.amountChange(e, item.id)}}/>
+                      onChange={(e) => {this.amountChange(e.target.value, item.id)}}/>
                     <Button
                       onClick={
-                        () => this.props.addToCart(item, amount)
+                        () => {
+                          this.amountChange(1, item.id)
+                          this.props.addToCart(item, amount)
+                        }
                       }>
                       Add to cart
                     </Button>
