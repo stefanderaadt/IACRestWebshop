@@ -117,23 +117,24 @@ class Home extends React.Component {
             return (
               <Paper key={item.id} style={styles.paper}>
                 <Grid container spacing={24}>
-
                   <Grid style={{display: 'flex', flexDirection: 'column'}}
                     item xs={12} sm={6}>
-                    <div style={{fontWeight: 'bold'}}>
-                      { item.name }
-                    </div>
-                    <div>
-                      { item.description }
-                    </div>
-                    <div>
-                      {isToday(item.discounts)? (
-                        <Fragment><span style={{color: 'red'}}>
-                          ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
-                        ) : (
-                        <Fragment>${ item.price }</Fragment>
-                      )}
-                    </div>
+                    <Link to={"/product/" + item.id} style={{textDecoration: 'none', color: 'black'}}>
+                      <div style={{fontWeight: 'bold'}}>
+                        { item.name }
+                      </div>
+                      <div>
+                        { item.description }
+                      </div>
+                      <div>
+                        {isToday(item.discounts)? (
+                          <Fragment><span style={{color: 'red'}}>
+                            ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
+                          ) : (
+                          <Fragment>${ item.price }</Fragment>
+                        )}
+                      </div>
+                    </Link>
                   </Grid>
 
                   <Grid style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}
