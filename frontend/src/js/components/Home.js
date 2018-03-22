@@ -99,7 +99,7 @@ class Home extends React.Component {
             )
           }, this)}
 
-          <Typography variant="display1">
+          <Typography variant="display1" style={{marginTop: '12px'}}>
             New products
           </Typography>
 

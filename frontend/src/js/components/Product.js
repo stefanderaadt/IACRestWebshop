@@ -94,6 +94,7 @@ class Product extends React.Component {
 const styles = {
   paper: {
     padding: '12px',
+    margin: '12px',
     marginTop: '12px',
     display: 'flex',
     justifyContent: 'space-between',
