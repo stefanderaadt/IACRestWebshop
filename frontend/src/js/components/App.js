@@ -138,7 +138,8 @@ class App extends React.Component {
               <Route path='/orders' render={(props) => (
                 <Order {...props}
                   cart={this.props.state.cart}
-                  completeOrder={this.completeOrder}/>
+                  completeOrder={this.completeOrder}
+                  remove={this.removeFromCart}/>
               )}/>
               <PrivateRoute path='/orders/:id' render={(props) => (
                 <Product {...props}
