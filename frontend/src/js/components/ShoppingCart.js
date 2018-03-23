@@ -53,9 +53,9 @@ class ShoppingCart extends React.Component {
                     { item.product.name }
                   </div>
                   <div style={styles.buttonWrapper}>
-                    { item.amount } x
+                    { item.amount } x &nbsp;
                     {isToday(item.product.discounts)? (
-                      <Fragment><span style={{color: 'tomato', paddingLeft: '4px', paddingRight: '4px'}}>
+                      <Fragment><span style={{color: 'tomato', paddingRight: '4px'}}>
                         ${ item.product.price } </span> - (%{getCurrentDiscountPercentage(item.product.discounts)}) ${getDiscountedProductPrice(item.product)}</Fragment>
                       ) : (
                         <Fragment>${ item.product.price }</Fragment>
@@ -79,11 +79,11 @@ class ShoppingCart extends React.Component {
           null
         ) : (
           <Fragment>
-            <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '48px'}}>
+            <hr style={styles.hr}/>
+            <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '34px'}}>
               <b style={{paddingRight: '12px'}}>Total:</b> ${getTotalCartPrice(this.props.cart.all)}
             </div>
-            <hr style={styles.hr}/>
-            <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px'}}>
+            <div style={{display: 'flex', justifyContent: 'flex-end', paddingRight: '12px', paddingTop: '12px'}}>
               <Button
                 component={ Link }
                 to="/orders">

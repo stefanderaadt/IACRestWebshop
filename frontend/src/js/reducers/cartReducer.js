@@ -1,7 +1,6 @@
 const defaultState = {
     all: [],
     open: false,
-
     ordering: false,
     ordered: true,
     error: null

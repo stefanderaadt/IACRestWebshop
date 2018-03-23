@@ -12,6 +12,8 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,6 +23,8 @@ public class ProductController {
 	private ProductRepository productRepository;
 	private CategoryRepository categoryRepository;
 
+	private long DAY_IN_MS = 1000 * 60 * 60 * 24;
+
 	public ProductController(ProductRepository productRepository,
                              CategoryRepository categoryRepository) {
 		this.productRepository = productRepository;
@@ -29,23 +33,29 @@ public class ProductController {
 
 	@PostMapping
 	public void addProduct(@RequestBody Product product) {
-	    System.out.println(product);
-
         Category category = categoryRepository.getOne(product.getCategory().getId());
+
+        System.out.println(category);
 
         //Add category to product and product to category
         product.setCategory(category);
         category.getProducts().add(product);
 
-        System.out.println(product);
-
-		productRepository.save(product);
+		//productRepository.save(product);
 	}
 
 	@GetMapping
 	public List<Product> getProducts() {
 		return productRepository.findAll();
 	}
+
+    @GetMapping("/new")
+    public List<Product> getNewProducts() {
+	    Date lastWeek = new Date(System.currentTimeMillis() - (2 * DAY_IN_MS));
+
+        return productRepository.findByCreatedAtBetween(
+                new Timestamp(lastWeek.getTime()), new Timestamp(new Date().getTime()));
+    }
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable long id, HttpServletResponse response) {

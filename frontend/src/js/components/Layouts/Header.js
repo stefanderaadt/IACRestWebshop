@@ -75,7 +75,10 @@ class Header extends React.Component {
                   open={ open }
                   onClose={ this.handleClose }
                 >
-                  <Cart cart={ this.props.cart } remove={ this.props.remove }/>
+                  <Cart
+                    cart={ this.props.cart }
+                    remove={ this.props.remove }
+                    closeCart={this.props.closeCart}/>
                 </Menu>
               </Fragment>
           ) : (

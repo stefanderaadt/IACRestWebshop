@@ -16,6 +16,26 @@ export function isToday(discounts){
   return false
 }
 
+export function getCurrentDiscountBeginEnd(discounts){
+  const today = new Date()
+
+  var begin
+  var end
+
+  for(var i = 0; i < discounts.length; i++){
+    begin = new Date(discounts[i].beginDate)
+    end = new Date(discounts[i].endDate)
+    if((begin<today) &&
+      (today<end)){
+
+        return "Begindate: "+
+        begin.getFullYear()+"-"+(begin.getMonth()+1)+"-"+begin.getDate()
+        +" Enddate: "+
+        end.getFullYear()+"-"+(end.getMonth()+1)+"-"+end.getDate()
+      }
+  }
+}
+
 export function getCurrentDiscountPercentage(discounts){
   const today = new Date()
 

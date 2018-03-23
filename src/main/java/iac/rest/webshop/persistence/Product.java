@@ -2,8 +2,11 @@ package iac.rest.webshop.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,23 +23,27 @@ public class Product {
 
 	private float price;
 
+    @CreationTimestamp
+	private Timestamp createdAt;
+
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "product_id")
 	private List<Discount> discounts = new ArrayList<>();
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private Category category;
 
 	protected Product() {}
 
-    public Product(String name, String description, float price, List<Discount> discounts, Category category) {
+    public Product(String name, String description, float price, List<Discount> discounts, Category category, Timestamp createdAt) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.discounts = discounts;
         this.category = category;
+        this.createdAt = createdAt;
     }
 
     public long getId() {
@@ -67,6 +74,7 @@ public class Product {
 		this.discounts = discounts;
 	}
 
+    @JsonIgnore
 	public Category getCategory() {
 		return category;
 	}
@@ -83,13 +91,22 @@ public class Product {
         this.description = description;
     }
 
+    public Timestamp getCreated_at() {
+        return createdAt;
+    }
+
+    public void setCreated_at(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
-                ", discounts=" + discounts +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

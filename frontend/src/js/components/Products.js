@@ -1,7 +1,13 @@
 import React, {Fragment} from "react"
 import { Paper, Input, Button, Typography, Grid } from 'material-ui'
+import { Link } from 'react-router-dom'
 
-import {isToday, getDiscountedProductPrice, getCurrentDiscountPercentage} from "../helpers/ProductHelper"
+import {
+  isToday,
+  getDiscountedProductPrice,
+  getCurrentDiscountPercentage,
+  getCurrentDiscountBeginEnd
+} from "../helpers/ProductHelper"
 
 class Products extends React.Component {
   constructor(props) {
@@ -38,7 +44,7 @@ class Products extends React.Component {
       <div>
         <div style={{padding: '12px'}}>
           <Typography variant="display1">
-            products
+            All products
           </Typography>
 
           {this.props.products.all.map(function(item, i){
@@ -51,28 +57,31 @@ class Products extends React.Component {
             }
 
             return (
+
               <Paper key={item.id} style={styles.paper}>
                 <Grid container spacing={24}>
-
                   <Grid style={{display: 'flex', flexDirection: 'column'}}
                     item xs={12} sm={6}
                   >
-                    <div style={{fontWeight: 'bold'}}>
-                      { item.name }
-                    </div>
-                    <div>
-                      { item.description }
-                    </div>
-                    <div>
-                      {isToday(item.discounts)? (
-                        <Fragment><span style={{color: 'red'}}>
-                          ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}</Fragment>
-                        ) : (
-                        <Fragment>${ item.price }</Fragment>
-                      )}
-                    </div>
+                    <Link to={"/product/" + item.id} style={{textDecoration: 'none', color: 'black'}}>
+                      <div style={{fontWeight: 'bold'}}>
+                        { item.name }
+                      </div>
+                      <div>
+                        { item.description }
+                      </div>
+                      <div>
+                        {isToday(item.discounts)? (
+                            <Fragment><span style={{color: 'red'}}>
+                              ${ item.price }</span> - (%{getCurrentDiscountPercentage(item.discounts)}) ${getDiscountedProductPrice(item)}<br />
+                              {getCurrentDiscountBeginEnd(item.discounts)}
+                            </Fragment>
+                          ) : (
+                          <Fragment>${ item.price }</Fragment>
+                        )}
+                      </div>
+                    </Link>
                   </Grid>
-
                   <Grid style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center'}}
                     item xs={12} sm={6}
                   >
@@ -94,6 +103,7 @@ class Products extends React.Component {
 
                 </Grid>
               </Paper>
+
             )
           }, this)}
 
