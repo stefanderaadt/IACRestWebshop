@@ -1,6 +1,7 @@
 package iac.rest.webshop.controllers;
 
 import iac.rest.webshop.persistence.Category;
+import iac.rest.webshop.persistence.Discount;
 import iac.rest.webshop.persistence.Product;
 import iac.rest.webshop.repositories.ApplicationUserRepository;
 import iac.rest.webshop.repositories.CategoryRepository;
@@ -61,11 +62,29 @@ public class ProductController {
 		Product existingProduct = productRepository.getOne(id);
 
 		Assert.notNull(existingProduct, "Product not found");
-		existingProduct.setName(product.getName());
-		existingProduct.setDescription(product.getDescription());
-		existingProduct.setDiscounts(product.getDiscounts());
-		existingProduct.setPrice(product.getPrice());
+		if(product.getName() != null && !product.getName().isEmpty()) {
+            existingProduct.setName(product.getName());
+        }
+
+        if(product.getDescription() != null && !product.getDescription().isEmpty()) {
+            existingProduct.setDescription(product.getDescription());
+        }
+
+        if(product.getDiscounts() != null){
+            //existingProduct.setDiscounts(product.getDiscounts());
+            for(Discount discount: product.getDiscounts()){
+                existingProduct.getDiscounts().add(discount);
+            }
+        }
+
+        if(product.getPrice() != 0){
+            existingProduct.setPrice(product.getPrice());
+        }
+
 		existingProduct.setCategory(product.getCategory());
+
+        System.out.println(product);
+		System.out.println(existingProduct);
 		productRepository.save(existingProduct);
 	}
 
