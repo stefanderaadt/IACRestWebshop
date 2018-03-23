@@ -33,15 +33,16 @@ public class ProductController {
 
 	@PostMapping
 	public void addProduct(@RequestBody Product product) {
-        Category category = categoryRepository.getOne(product.getCategory().getId());
+	    //Add category when set
+	    if(product.getCategory() != null){
+            Category category = categoryRepository.getOne(product.getCategory().getId());
 
-        System.out.println(category);
+            //Add category to product and product to category
+            product.setCategory(category);
+            category.getProducts().add(product);
+        }
 
-        //Add category to product and product to category
-        product.setCategory(category);
-        category.getProducts().add(product);
-
-		//productRepository.save(product);
+		productRepository.save(product);
 	}
 
 	@GetMapping
